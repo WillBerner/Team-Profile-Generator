@@ -2,6 +2,10 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const questions = require('./src/questions.js');
 
+let Manager = require('./lib/Manager.js');
+let Intern = require('./lib/Intern.js')
+let Engineer = require('./lib/Engineer.js')
+
 // WHEN I start the application
 // THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
 // WHEN I enter the team manager’s name, employee ID, email address, and office number
@@ -22,7 +26,10 @@ async function init() {
         })
         .catch((error) => {console.error(error)})
 
-    console.log(results);
+
+    let manager = new Manager(results.managerName, results.managerID, results.managerEmail, results.managerOfficeNumber);
+    console.log(manager);
+
 }
 
 
