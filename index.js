@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const questions = require('./src/questions.js');
+const managerQuestions = require('./src/managerQuestions.js');
+const teammateQuestions = require('./src/teammateQuestions.js');
 
 let Manager = require('./lib/Manager.js');
 let Intern = require('./lib/Intern.js')
@@ -20,14 +21,26 @@ let Engineer = require('./lib/Engineer.js')
 async function init() {
 
     let results = null;
-    await inquirer.prompt(questions)
-        .then(data => {
-            results = data;
-        })
-        .catch((error) => {console.error(error)})
+
+    await inquirer.prompt(managerQuestions)
+
+        .then(data => results = data )
+
+        .catch((error) => console.error(error));
 
 
     let manager = new Manager(results.managerName, results.managerID, results.managerEmail, results.managerOfficeNumber);
+
+    while (results.addTeammate) {
+        
+        await inquirer.prompt(teammateQuestions)
+
+        .then(data => results = data)
+
+        .catch((error) => console.error(error));
+        
+    }
+
     console.log(manager);
 
 }

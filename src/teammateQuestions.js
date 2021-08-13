@@ -1,6 +1,6 @@
-const questions = [
+const teammateQuestions = [
     {
-        name: "managerName",
+        name: "teammateName",
         type: "input",
         message: "Please enter the name of the team manager."
     },
@@ -19,6 +19,11 @@ const questions = [
         type: "input",
         message: "Please enter the office number of the team manager."
     },
+    {
+        name: "addTeammate",
+        type: "confirm",
+        message: "Would you like to add a team member?"
+    },
 ]
 
-module.exports = questions;
+module.exports = teammateQuestions;
