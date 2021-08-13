@@ -1,7 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const managerQuestions = require('./src/managerQuestions.js');
-const teammateQuestions = require('./src/teammateQuestions.js');
+const engineerQuestions = require('./src/engineerQuestions.js');
+const internQuestions = require('./src/internQuestions.js');
 
 let Manager = require('./lib/Manager.js');
 let Intern = require('./lib/Intern.js')
@@ -21,28 +22,55 @@ let Engineer = require('./lib/Engineer.js')
 async function init() {
 
     let results = null;
+    let team = [];
 
     await inquirer.prompt(managerQuestions)
-
-        .then(data => results = data )
-
-        .catch((error) => console.error(error));
-
-
-    let manager = new Manager(results.managerName, results.managerID, results.managerEmail, results.managerOfficeNumber);
-
-    while (results.addTeammate) {
-        
-        await inquirer.prompt(teammateQuestions)
 
         .then(data => results = data)
 
         .catch((error) => console.error(error));
-        
+
+    team.push(new Manager(results.managerName, results.managerID, results.managerEmail, results.managerOfficeNumber));
+    
+    if (!results.addTeammate) {
+        return;
     }
 
-    console.log(manager);
+    while (results.addTeammate) {
 
+        let whoToAdd = await inquirer.prompt([{
+            name: "whoToAdd",
+            type: "list",
+            message: "Would you like to add an engineer or an intern?",
+            choices: ["Engineer", "Intern"]
+        }]).then(data => data).catch((error) => console.error(error));
+
+        // TODO: Refactor
+        if (whoToAdd.whoToAdd == "Engineer") {
+
+            await inquirer.prompt(engineerQuestions)
+
+            .then(data => results = data)
+
+            .catch((error) => console.error(error));
+
+            team.push(new Engineer(results.engineerName, results.engineerID, results.engineerEmail, results.gitHub));
+
+        } else {
+
+            await inquirer.prompt(internQuestions)
+
+            .then(data => results = data)
+
+            .catch((error) => console.error(error));
+
+            team.push(new Intern(results.internName, results.internID, results.internEmail, results.school));
+
+        }
+
+    }
+
+    console.log(team);
 }
 
 
