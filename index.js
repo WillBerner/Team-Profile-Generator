@@ -39,14 +39,13 @@ async function init() {
     while (results.addTeammate) {
 
         let whoToAdd = await inquirer.prompt([{
-            name: "whoToAdd",
+            name: "result",
             type: "list",
             message: "Would you like to add an engineer or an intern?",
             choices: ["Engineer", "Intern"]
         }]).then(data => data).catch((error) => console.error(error));
 
-        // TODO: Refactor
-        if (whoToAdd.whoToAdd == "Engineer") {
+        if (whoToAdd.result == "Engineer") {
 
             await inquirer.prompt(engineerQuestions)
 
@@ -69,7 +68,6 @@ async function init() {
         }
 
     }
-
     console.log(team);
 }
 
