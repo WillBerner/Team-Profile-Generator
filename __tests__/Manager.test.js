@@ -9,5 +9,6 @@ describe("Manager class", () => {
         expect(example.getEmail()).toBe("Dimitri@gmail.com");
         expect(example.getOfficeNumber()).toBe(426);
         expect(example.getRole()).toBe("Manager");
+        
     });
 });

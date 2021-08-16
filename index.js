@@ -115,7 +115,7 @@ function writeHTML(data) {
 
     let html = generateHTML(data);
 
-    fs.writeFile("./dist/result.html", html, (error) => {
+    fs.writeFile("./dist/index.html", html, (error) => {
         (error) ? log.error(error) : console.log("Success");
     })
 }
