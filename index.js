@@ -22,16 +22,20 @@ let Engineer = require('./lib/Engineer.js')
 function generateTeamMemberCard(teammember) {
 
     let uniqueInfo = '';
+    let role = '';
 
     switch (teammember.getRole()){
         case "Engineer":
             uniqueInfo = `GitHub: <a href="https://github.com/${teammember.getGithub()}">${teammember.getGithub()}</a>`;
+            role = `<span class="material-icons">engineering</span> &nbsp ${teammember.getName()}`;
             break;
         case "Intern":
             uniqueInfo = `School: ${teammember.getSchool()}`;
+            role = `<span class="material-icons">menu_book</span> &nbsp ${teammember.getName()}`;
             break;
         case "Manager":
             uniqueInfo = `Office Number: ${teammember.getOfficeNumber()}`;
+            role = `<span class="material-icons">coffee</span> &nbsp ${teammember.getName()}`;
             break;
         default:
             throw new Error("Sorry, team member role is not supported!")
@@ -42,8 +46,8 @@ function generateTeamMemberCard(teammember) {
     <div class="col s12 m6 l4">
         <div class="card blue darken-1">
             <div class="card-content white-text">
-                <span class="card-title">${teammember.getName()}</span>
-                <p>${teammember.getRole()}</p>
+                <span class="card-title">${role}</span>
+                <h6>${teammember.getRole()}</h6>
 
                 <ul class="collection black-text">
                     <li class="collection-item">Team ID: ${teammember.getId()}</li>
@@ -78,7 +82,9 @@ function generateHTML(team) {
         <!-- Materialize JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
             
-        
+        <!-- Material Icon Library -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <!-- Custom CSS -->
         <link rel="stylesheet" href="./style.css">
 
@@ -128,6 +134,7 @@ async function init() {
     team.push(new Manager(results.managerName, results.managerID, results.managerEmail, results.managerOfficeNumber));
 
     if (!results.addTeammate) {
+        writeHTML(team);
         return;
     }
 
