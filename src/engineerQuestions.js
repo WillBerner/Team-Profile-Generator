@@ -17,7 +17,7 @@ const engineerQuestions = [
     {
         name: "gitHub",
         type: "input",
-        message: "Please enter the engineer's github link."
+        message: "Please enter the engineer's GitHub Username."
     },
     {
         name: "addTeammate",

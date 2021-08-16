@@ -19,10 +19,48 @@ let Engineer = require('./lib/Engineer.js')
 // WHEN I decide to finish building my team
 // THEN I exit the application, and the HTML is generated
 
+function generateTeamMemberCard(teammember) {
+
+    let uniqueInfo = '';
+
+    switch (teammember.getRole()){
+        case "Engineer":
+            uniqueInfo = `GitHub: <a href="https://github.com/${teammember.getGithub()}">${teammember.getGithub()}</a>`;
+            break;
+        case "Intern":
+            uniqueInfo = `School: ${teammember.getSchool()}`;
+            break;
+        case "Manager":
+            uniqueInfo = `Office Number: ${teammember.getOfficeNumber()}`;
+            break;
+        default:
+            throw new Error("Sorry, team member role is not supported!")
+    }
+
+    return `
+
+    <div class="col s12 m6 l4">
+        <div class="card blue darken-1">
+            <div class="card-content white-text">
+                <span class="card-title">${teammember.getName()}</span>
+                <p>${teammember.getRole()}</p>
+
+                <ul class="collection black-text">
+                    <li class="collection-item">Team ID: ${teammember.getId()}</li>
+                    <li class="collection-item">Email: <a href="mailto: ${teammember.getEmail()}">${teammember.getEmail()}</a></li>
+                    <li class="collection-item">${uniqueInfo}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    `;
+}
 function generateHTML(team) {
 
-    let teamString = '';
-    team.forEach(member => teamString += `Name: ${member.name}, Email: ${member.email}, Team ID: ${member.id}\n`)
+    var teamHTML = '';
+
+    team.forEach(teammember => teamHTML += generateTeamMemberCard(teammember));
 
     return `
     <!DOCTYPE html>
@@ -32,7 +70,7 @@ function generateHTML(team) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-        <title>Your Team</title>
+        <title>My Team</title>
 
         <!-- Materialize CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -40,14 +78,27 @@ function generateHTML(team) {
         <!-- Materialize JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
             
+        
         <!-- Custom CSS -->
         <link rel="stylesheet" href="./style.css">
 
     </head>
     <body>
 
-    <h6>${teamString}<h6>
-    
+        <nav>
+            <div class="nav-wrapper">
+            <a class="brand-logo center">My Team</a>
+            </div>
+        </nav>
+
+        <main class="container">
+            <div class="row">
+
+                ${teamHTML}
+
+            </div>
+        </main>
+
     </body>
     </html>
     `;
@@ -114,7 +165,7 @@ async function init() {
     }
 
     writeHTML(team);
-    
+
 }
 
 init();
