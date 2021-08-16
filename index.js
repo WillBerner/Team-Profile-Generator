@@ -19,6 +19,12 @@ let Engineer = require('./lib/Engineer.js')
 // WHEN I decide to finish building my team
 // THEN I exit the application, and the HTML is generated
 
+function writeHTML(data) {
+    fs.writeFile("./dist/result.html", data, (error) => {
+        (error) ? log.error(error) : console.log("Success");
+    })
+}
+
 async function init() {
 
     let results = null;
@@ -68,8 +74,10 @@ async function init() {
         }
 
     }
+
+    writeHTML(team);
+
     console.log(team);
 }
-
 
 init();
