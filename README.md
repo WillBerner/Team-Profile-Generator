@@ -11,24 +11,24 @@ Team Profile Generator is a Node.js application built with Inquirer and fs libra
 
 ## Installation Instructions
 
-This application requires node.js, so install node from their website if you do not have it. Next, from the root directory, install the npm dependencies Inquirer and Jest with the command 'npm i'
+This application requires node.js, so install node from their website if you do not have it. Next, from the root directory, install the npm dependencies Inquirer and Jest with the command: 
+      
+    'npm i'
 
 ## Usage Instructions
 
-Still in the root directory, run 'node index.js'. You will be given prompts regarding your team and information about them that you must fill out, starting with your team's manager. You then have the option to add either Engineers or Interns, as many as you have, until you have given information on everybody in your team. 
+Still in the root directory, run: 
+      
+    'node index.js' 
+      
+You will be given prompts regarding your team and information about them that you must fill out, starting with your team's manager. You then have the option to add either Engineers or Interns, as many as you have, until you have given information on everybody in your team. 
 
 After this, an HTML webpage will be generated in the local ./dist/ folder containing quick and accessilbe information about your team.
 
 ## Testing Instructions
 
-To test this software, run 'npm run test' from the root directory - after making sure you've installed Jest.
+To test this software, run: 
 
+    'npm run test' 
 
-
-
-
-
-
-
-
-
+from the root directory (after making sure you've installed Jest!).
