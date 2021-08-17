@@ -8,6 +8,7 @@ Team Profile Generator is a Node.js application built with Inquirer and fs libra
 * [Installation Instructions](#installation-instructions)
 * [Usage Instructions](#usage-instructions)
 * [Testing Instructions](#testing-instructions)
+* [Demo](#demo)
 
 ## Installation Instructions
 
@@ -32,3 +33,8 @@ To test this software, run:
     'npm run test' 
 
 from the root directory (after making sure you've installed Jest!).
+
+## Demo
+[![Demo](https://img.youtube.com/vi/KrnTw_LhYRM/0.jpg)](https://www.youtube.com/watch?v=KrnTw_LhYRM)
+
+&copy; 2021 [Will](https://github.com/WillBerner)
